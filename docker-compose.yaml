@@ -1,0 +1,19 @@
+services:
+
+    agent-chat-ui:
+        build:
+            context: ./agent-chat-ui
+            dockerfile: Dockerfile
+        ports:
+            - "3001:3000"
+
+    tools-agent:
+        build:
+            context: oap-agent
+            args:
+                GIT_REPO: https://github.com/langchain-ai/oap-langgraph-tools-agent.git
+                GIT_COMMIT: ebbb8a86d0366ee2c3e0828a8b83f87d33a95ca8
+        env_file:
+            - .env
+        ports:
+            - "2025:2024"
